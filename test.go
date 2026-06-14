@@ -4,6 +4,6 @@ import "fmt"
 
 func main() {
 
-	fmt.Println("Первое домашнее задание")
+	fmt.Println("Тест мердж реквест 1")
 
 }

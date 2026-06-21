@@ -6,8 +6,16 @@ import (
 )
 
 func main() {
-	var len int = 8 // нулевое значение
-	//var y int // нулевое значение
+
+	var len int
+
+	fmt.Print("Введите размер шахматной доски: ")
+	fmt.Scan(&len)
+
+	if len == 0 {
+		len = 8
+	}
+
 	var str string
 
 	countflag := true
@@ -23,15 +31,33 @@ func main() {
 			countflag = true
 		}
 
-		for j := 0; j < len; j++ {
-			if strings.HasSuffix(str, "#") {
-				str = str + " "
-			} else {
-				str = str + "#"
-			}
-		}
+		str = printline(len, str)
 
 		fmt.Printf("%s\n", str)
 	}
 
+}
+
+func printline(len int, str string) string {
+
+	for j := 0; j < len-1; j++ {
+		if strings.HasSuffix(str, "#") {
+			str = str + " "
+		} else {
+			str = str + "#"
+		}
+	}
+	return str
+}
+
+func countflagstr(countflag bool, str string) string {
+	if countflag {
+		str = " "
+		countflag = false
+	} else {
+
+		str = "#"
+		countflag = true
+	}
+	return str
 }

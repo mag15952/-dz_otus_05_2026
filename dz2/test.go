@@ -12,4 +12,10 @@ func main() {
 
 	_ = gin.Default()
 
+	var name string
+	fmt.Print("Введите ваше имя: ")
+	// Передаем указатель на переменную для записи
+	fmt.Scan(&name)
+	fmt.Printf("Привет, %s!\n", name)
+
 }

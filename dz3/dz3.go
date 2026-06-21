@@ -49,15 +49,3 @@ func printline(len int, str string) string {
 	}
 	return str
 }
-
-func countflagstr(countflag bool, str string) string {
-	if countflag {
-		str = " "
-		countflag = false
-	} else {
-
-		str = "#"
-		countflag = true
-	}
-	return str
-}

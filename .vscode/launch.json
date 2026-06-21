@@ -1,12 +1,13 @@
 {
-    // Use IntelliSense to learn about possible attributes.
-    // Hover to view descriptions of existing attributes.
-    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        
+  "version": "0.2.0",
+  "configurations": [
     {
-    "console": "integratedTerminal"
+      "name": "Run",
+      "type": "go",
+      "request": "launch",
+      "mode": "auto",
+      "console": "integratedTerminal",
+      "program": "C:/Users/Mary/Desktop/Обучение/OTUS/go/git_homework/dz_otus_05_2026/dz3",
     }
-    ]
+  ]
 }

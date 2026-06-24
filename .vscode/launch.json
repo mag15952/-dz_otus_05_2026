@@ -7,7 +7,7 @@
       "request": "launch",
       "mode": "auto",
       "console": "integratedTerminal",
-      "program": "C:/Users/Mary/Desktop/Обучение/OTUS/go/git_homework/dz_otus_05_2026/dz3",
+      "program": "./dz3",
     }
   ]
 }

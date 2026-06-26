@@ -47,21 +47,28 @@ func main() {
 	// формирование и вывод линий
 	fmt.Printf("%s\n", player1)
 
-	letters := printlines.PrintLetters(length)
+	letters := printlines.PrintLetters(length - 1)
 	fmt.Printf("  %s\n", letters)
 
 	for i := 0; i < length; i++ {
 
-		if i <= 1 {
+		if i == 0 {
 			//  расставляем белые
-			str = printlines.PrintWhite(length)
+			str = printlines.PrintWhite(length - 1)
+			//  расставляем белые пешки
+		} else if i == 1 {
+			str = printlines.PrintWhitePowns(length - 1)
+
 		} else if length > 4 && i > 1 && i < length-2 {
 			//  рисуем поле
 			countflag, str = cycleJ(countflag, str)
-			str = printlines.Printline(length, str)
-		} else {
-			//  расставляем черные
-			str = printlines.PrintBlack(length)
+			str = printlines.Printline(length-1, str)
+		} else if i == length-2 {
+			//  расставляем черные пешки
+			str = printlines.PrintBlackPowns(length - 1)
+		} else if i == length-1 {
+			//  расставляем черные фигуры
+			str = printlines.PrintBlack(length - 1)
 		}
 
 		fmt.Printf("%d %s\n", i+1, str)

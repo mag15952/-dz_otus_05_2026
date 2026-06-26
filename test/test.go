@@ -7,23 +7,35 @@ import (
 
 func main() {
 
-	var s string
+	//var s string
 
-	/*for i := 'A'; i <= 'Z'; i++ {
-		s = s + string(i)
-		fmt.Printf("%c ", i)
+	//s := []string{string('\u265a'), string('\u265b'), string('\u265c'),
+	//	string('\u265d'), string('\u265e'), string('\u265f')}
+	schess := []string{string('\u265c'), string('\u265e'), string('\u265d'),
+		string('\u265a'), string('\u265b'), string('\u265d'), string('\u265e'), string('\u265c')}
+
+	length := 15
+
+	var result []string
+	//pawn := string('\u265f')
+
+	massiveCount := len(schess)
+	count := 0
+
+	for i := 0; i <= length; i++ {
+
+		if count >= massiveCount {
+			count = 0
+		}
+
+		result = append(result, schess[count])
+
+		count++
+
 	}
-	//fmt.Println()*/
 
-	for i := 'A'; i <= 'Z'; i++ {
+	fmt.Printf("%s\n", strings.Join(result, " | "))
 
-		symbol := string(i)
-
-		s = checkContains(s, symbol)
-		s = s + " "
-
-	}
-	fmt.Printf("%s ", s)
 }
 
 func checkContains(s string, symbol string) string {

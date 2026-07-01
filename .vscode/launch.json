@@ -7,7 +7,7 @@
       "request": "launch",
       "mode": "auto",
       "console": "integratedTerminal",
-      "program": "./dz4",
+      "program": "./dz5",
     }
   ]
 }

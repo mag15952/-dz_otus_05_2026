@@ -5,13 +5,19 @@ import (
 	common "main/dz6/internal/repository"
 )
 
+type Player interface {
+	GetPlayer(int) string
+	PrintPlayer(int)
+	SetPlayers()
+}
+
 type Players struct {
 	player1 string
 	player2 string
 }
 
-func NewPlayers() Players {
-	return Players{
+func NewPlayers() *Players {
+	return &Players{
 		player1: "",
 		player2: "",
 	}

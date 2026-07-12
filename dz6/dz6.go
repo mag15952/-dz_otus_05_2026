@@ -25,7 +25,10 @@ func main() {
 
 	chessboard := chessboard.NewChessboard(length)
 
-	player := players.NewPlayers()
+	var player players.Player
+
+	player = players.NewPlayers()
+
 	player.SetPlayers()
 
 	common.ClearTerminal()
@@ -37,5 +40,5 @@ func main() {
 
 	player.PrintPlayer(1)
 
-	service.PlayChess(player, length, &chessboard)
+	service.PlayChessNew(player, length, &chessboard)
 }

@@ -2,53 +2,71 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"time"
 )
 
 func main() {
 
-	//var s string
+	// Версия с очисткой и абсолютным позиционированием
+	// fmt.Print("\033[H\033[J")
+	for i := 0; i < 3; i++ {
+		fmt.Println("---")
+	}
 
-	//s := []string{string('\u265a'), string('\u265b'), string('\u265c'),
-	//	string('\u265d'), string('\u265e'), string('\u265f')}
-	schess := []string{string('\u265c'), string('\u265e'), string('\u265d'),
-		string('\u265a'), string('\u265b'), string('\u265d'), string('\u265e'), string('\u265c')}
+	toggle := true
+	for {
+		// Версия с очисткой и абсолютным позиционированием
+		// fmt.Printf("\033[%d;%dH", 2, 2)
 
-	length := 15
+		// Версия без очистки
+		fmt.Printf("\033[%dA", 2)
+		fmt.Printf("\033[%dC", 1)
 
-	var result []string
-	//pawn := string('\u265f')
-
-	massiveCount := len(schess)
-	count := 0
-
-	for i := 0; i <= length; i++ {
-
-		if count >= massiveCount {
-			count = 0
+		if toggle {
+			fmt.Print("x")
+		} else {
+			fmt.Print("-")
 		}
 
-		result = append(result, schess[count])
+		// Версия с очисткой и абсолютным позиционированием
+		// fmt.Printf("\033[%d;%dH", 4, 1)
 
-		count++
+		// Версия без очистки
+		fmt.Printf("\033[%dB", 2)
+		fmt.Printf("\033[%dD", 2)
 
+		toggle = !toggle
+		time.Sleep(time.Second)
 	}
 
-	fmt.Printf("%s\n", strings.Join(result, " | "))
+	/*for i := 0; i <= 10; i++ {
+		// \r возвращает каретку, чтобы перезаписать текущую строку
 
-}
+		fmt.Printf("\rПрогресс: %d%%", i)
 
-func checkContains(s string, symbol string) string {
+		time.Sleep(2 * time.Second)
 
-	cont := strings.Contains(s, symbol)
-	if cont == true {
+		fmt.Printf("\rПрогресс222: %d%%", i)
 
-		symbol = symbol + symbol
-		s = checkContains(s, symbol)
-
-	} else {
-
-		s = s + symbol
+		time.Sleep(2 * time.Second)
 	}
-	return s
+	fmt.Println("\nГотово!")*/
+
+	//fmt.Println("yFDLFKJLKSJ\n")
+
+	//fmt.Print("\033[2J")
+
+	/*for i := range 2 {
+		// Возвращаем курсор в начало экрана перед новым выводом
+		fmt.Printf("\033[HСчетчик: %d/10", i)
+		time.Sleep(1 * time.Second)
+		fmt.Printf("\033[HСчетчик: %d/5", i)
+		time.Sleep(1 * time.Second)
+	}*/
+	//fmt.Println(rand.IntN(2))
+
+	//fmt.Print("\033[2J")
+
+	//fmt.Println("yFDLFKJLKSJ\n")
+
 }

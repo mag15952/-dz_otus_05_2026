@@ -1,23 +1,16 @@
 package printlines
 
 import (
-	"main/dz5/packages/common"
 	"strings"
 )
 
-func PrintlineNew(len int, countflag bool) string {
+func PrintlineNew(len int, i *int) string {
 
 	var result []string
 
-	if countflag {
-		result = append(result, " ")
-	} else {
-		result = append(result, "#")
-	}
-
 	for j := 0; j < len; j++ {
 
-		if result[j] == " " {
+		if (*i+j)%2 == 0 {
 			result = append(result, "#")
 
 		} else {
@@ -102,7 +95,7 @@ func PrintBlack(length int) string {
 
 }
 
-func PrintLetters(length int) string {
+/*func PrintLetters(c Chessboard) string {
 
 	var massive []string
 	var result []string
@@ -131,4 +124,4 @@ func PrintLetters(length int) string {
 	}
 
 	return strings.Join(result, " | ")
-}
+}*/

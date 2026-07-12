@@ -34,7 +34,7 @@ func (c *Chessboard) PrintChessboard() {
 
 		} else if c.length > 4 && i > 1 && i < c.length-2 {
 			//  рисуем поле
-			str = printlines.PrintlineNew(c.length-1, countflag)
+			str = printlines.PrintlineNew(c.length, &i)
 			countflag = !countflag
 
 		} else if i == c.length-2 {

@@ -4,8 +4,9 @@ import (
 	"fmt"
 	"main/dz6/internal/models/chessboard"
 	"main/dz6/internal/models/players"
-	common "main/dz6/internal/repository"
+	"main/dz6/internal/repository"
 	"main/dz6/internal/service"
+	common "main/dz6/internal/service/common"
 )
 
 func main() {
@@ -23,22 +24,20 @@ func main() {
 		return
 	}
 
-	chessboard := chessboard.NewChessboard(length)
+	chbrd := chessboard.NewChessboard(length)
+	plr := players.NewPlayers()
 
-	var player players.Player
-
-	player = players.NewPlayers()
-
-	player.SetPlayers()
+	repository.SetObject(plr)
+	repository.SetObject(chbrd)
 
 	common.ClearTerminal()
 
 	// формирование и вывод линий
-	player.PrintPlayer(0)
+	repository.PrintObject(plr, 0)
 
-	chessboard.PrintChessboard()
+	repository.PrintObject(chbrd, 0)
 
-	player.PrintPlayer(1)
+	repository.PrintObject(plr, 1)
 
-	service.PlayChessNew(player, length, &chessboard)
+	service.PlayChessNew(plr, length, chbrd)
 }

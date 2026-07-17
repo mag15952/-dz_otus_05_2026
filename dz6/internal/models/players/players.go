@@ -2,14 +2,14 @@ package players
 
 import (
 	"fmt"
-	common "main/dz6/internal/repository"
+	common "main/dz6/internal/service/common"
 )
 
-type Player interface {
+/*type Player interface {
 	GetPlayer(int) string
 	PrintPlayer(int)
-	SetPlayers()
-}
+	SetPlayers(int)
+}*/
 
 type Players struct {
 	player1 string
@@ -37,11 +37,11 @@ func (p Players) GetPlayer(i int) string {
 
 }
 
-func (p *Players) SetPlayers() {
+func (p *Players) SetPlayers(count int) {
 
 	var strp string
 
-	for i := range 2 {
+	for i := range count {
 
 		fmt.Printf("Введите ФИО игрока № %d: ", i+1)
 		//fmt.Println("Введите ФИО игрока № ", i+1)

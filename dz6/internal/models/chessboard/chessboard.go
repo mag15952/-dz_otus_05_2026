@@ -1,7 +1,7 @@
 package chessboard
 
 import (
-	common "main/dz6/internal/repository"
+	common "main/dz6/internal/service/common"
 	"strconv"
 )
 
@@ -10,17 +10,13 @@ type Chessboard struct {
 	AllBoard [][]string
 }
 
-func NewChessboard(len int) Chessboard {
-	return Chessboard{
+func NewChessboard(len int) *Chessboard {
+	return &Chessboard{
 		length: len,
 	}
 }
 
-func (c *Chessboard) AddAllBoard(arr []string) {
-	c.AllBoard = append(c.AllBoard, arr)
-}
-
-func (c *Chessboard) PrintChessboard() {
+func (c *Chessboard) SetChessboard() {
 
 	getLetters(c) //  расставляем буквы
 
@@ -49,8 +45,18 @@ func (c *Chessboard) PrintChessboard() {
 
 	}
 
+}
+
+func (c *Chessboard) PrintChessboard() {
+
 	common.PrintSliceNew(c.AllBoard)
 
+}
+
+///////////////////////////////////////
+
+func (c *Chessboard) AddAllBoard(arr []string) {
+	c.AllBoard = append(c.AllBoard, arr)
 }
 
 func getLetters(c *Chessboard) {

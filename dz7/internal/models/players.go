@@ -1,15 +1,9 @@
-package players
+package models
 
 import (
 	"fmt"
-	common "main/dz6/internal/service/common"
+	"main/dz7/internal/service"
 )
-
-/*type Player interface {
-	GetPlayer(int) string
-	PrintPlayer(int)
-	SetPlayers(int)
-}*/
 
 type Players struct {
 	player1 string
@@ -48,12 +42,13 @@ func (p *Players) SetPlayers(count int) {
 		fmt.Scan(&strp)
 		p.SetPlayer(i, strp)
 
-		err := common.CheckValue(p.GetPlayer(i))
+		err := service.CheckValue(p.GetPlayer(i))
 
 		if err != nil {
 			fmt.Println("Ошибка ввода:", err.Error())
 			return
 		}
+
 	}
 }
 

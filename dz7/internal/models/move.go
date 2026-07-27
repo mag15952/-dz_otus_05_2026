@@ -1,4 +1,4 @@
-package move
+package models
 
 type move interface {
 	SetMove(int, string, bool)

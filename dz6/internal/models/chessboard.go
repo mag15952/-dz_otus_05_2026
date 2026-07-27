@@ -1,4 +1,4 @@
-package chessboard
+package models
 
 import (
 	common "main/dz6/internal/service/common"
@@ -7,16 +7,27 @@ import (
 
 type Chessboard struct {
 	length   int
-	AllBoard [][]string
+	allBoard [][]string
 }
 
-func NewChessboard(len int) *Chessboard {
+func (c *Chessboard) GetLen() int {
+	return c.length
+}
+
+func (c *Chessboard) GetAllBoard() [][]string {
+	return c.allBoard
+}
+
+func newChessboard(len int) *Chessboard {
 	return &Chessboard{
 		length: len,
 	}
 }
 
-func (c *Chessboard) SetChessboard() {
+// func (c *Chessboard) NewChessboard() {
+func SetChessboard(len int) *Chessboard {
+
+	c := newChessboard(len)
 
 	getLetters(c) //  расставляем буквы
 
@@ -45,18 +56,19 @@ func (c *Chessboard) SetChessboard() {
 
 	}
 
+	return c
 }
 
 func (c *Chessboard) PrintChessboard() {
 
-	common.PrintSliceNew(c.AllBoard)
+	common.PrintSliceNew(c.allBoard)
 
 }
 
 ///////////////////////////////////////
 
 func (c *Chessboard) AddAllBoard(arr []string) {
-	c.AllBoard = append(c.AllBoard, arr)
+	c.allBoard = append(c.allBoard, arr)
 }
 
 func getLetters(c *Chessboard) {

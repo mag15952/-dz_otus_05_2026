@@ -3,11 +3,9 @@ package service
 import (
 	"fmt"
 	"log"
-	"main/dz6/internal/models/chessboard"
-	"main/dz6/internal/models/move"
-	"main/dz6/internal/models/players"
-	"main/dz6/internal/repository"
-	common "main/dz6/internal/service/common"
+	"main/dz7/internal/models"
+	"main/dz7/internal/repository"
+	"main/dz7/internal/service"
 	"math/rand/v2"
 	"slices"
 	"strconv"
@@ -17,12 +15,15 @@ import (
 	"github.com/manifoldco/promptui"
 )
 
-func setCommandsNew(player string, newMove *move.MoveStruct) /*(bool, int, string)*/ {
+func setCommandsNew(player string, newMove *models.MoveStruct, boardcount int) /*(bool, int, string)*/ {
 
 	var move string
 	var movecount int
 
 	items := []string{"Ввести ход (формат B:4_F:2)", "Автоход (ввести кол-во ходов)", "Сдался"}
+	if boardcount > 1 {
+		items = []string{"Автоход (ввести кол-во ходов)", "Сдался"}
+	}
 
 	// Создаем меню выбора
 	prompt := promptui.Select{
@@ -54,18 +55,18 @@ func setCommandsNew(player string, newMove *move.MoveStruct) /*(bool, int, strin
 
 }
 
-func PlayChessNew(player *players.Players, length int, chessboard *chessboard.Chessboard) {
+func PlayChessNew(player *models.Players, length int, chessboard *models.Chessboard) {
 
 	for {
 
-		var newMove move.MoveStruct
-		newMove = move.NewMove()
+		var newMove models.MoveStruct
+		newMove = models.NewMove()
 
 		for i := range 2 {
 
 			p := player.GetPlayer(i)
 			//cancel, movecount, move = setCommands(p)
-			setCommandsNew(p, &newMove)
+			setCommandsNew(p, &newMove, chessboard.Boardcount)
 
 			if newMove.Cancel == true {
 				break
@@ -153,7 +154,7 @@ func PlayChessNew(player *players.Players, length int, chessboard *chessboard.Ch
 
 				fromTo := strings.Split(newMove.Move, "_")
 
-				err := common.CheckSliceLen(fromTo, 2)
+				err := service.CheckSliceLen(fromTo, 2)
 				if err != nil {
 					fmt.Println("Ошибка ввода:", err.Error())
 					return
@@ -162,8 +163,8 @@ func PlayChessNew(player *players.Players, length int, chessboard *chessboard.Ch
 				from := strings.Split(fromTo[0], ":")
 				to := strings.Split(fromTo[1], ":")
 
-				err_from := common.CheckSliceLen(from, 2)
-				err_to := common.CheckSliceLen(to, 2)
+				err_from := service.CheckSliceLen(from, 2)
+				err_to := service.CheckSliceLen(to, 2)
 				if err_from != nil || err_to != nil {
 					fmt.Println("Ошибка ввода:", err_from.Error(), err_to.Error())
 					return
@@ -205,18 +206,19 @@ func printHistory(history []string) {
 	}
 }
 
-func printAllAgain(player *players.Players, chessboard *chessboard.Chessboard) {
+func printAllAgain(player *models.Players, chessboard *models.Chessboard) {
 
-	common.ClearTerminal()
+	service.ClearTerminal()
 
 	repository.PrintObject(player, 0)
 
-	common.PrintSliceNew(chessboard.AllBoard)
+	service.PrintSliceNew(chessboard.AllBoard)
 
 	repository.PrintObject(player, 1)
 }
 
-func makeMove(chessboard *chessboard.Chessboard, m map[string]int) string {
+func makeMove(chessboard *models.Chessboard, m map[string]int) string {
+
 	chessboard.AllBoard[m["line_to"]][m["column_to"]] =
 		chessboard.AllBoard[m["line_from"]][m["column_from"]]
 

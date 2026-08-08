@@ -8,6 +8,7 @@ type MoveStruct struct {
 	Movecount int
 	Move      string
 	History   []string
+	player    int
 	Cancel    bool
 }
 
@@ -15,15 +16,22 @@ func NewMove() MoveStruct {
 	return MoveStruct{
 		Movecount: 0,
 		Move:      "",
+		player:    0,
 		Cancel:    false,
 	}
 }
 
-func (m *MoveStruct) SetMove(movecount int, move string, cancel bool) {
+func (m *MoveStruct) GetMove() string {
+	return m.Move
+}
+
+func (m *MoveStruct) SetMove(movecount int,
+	move string, cancel bool,
+	player int) {
 
 	m.Movecount = movecount
 	m.Move = move
-	m.Cancel = cancel
+	m.player = player
 
 	m.History = append(m.History, move)
 

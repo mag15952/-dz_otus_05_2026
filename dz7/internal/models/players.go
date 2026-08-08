@@ -2,7 +2,7 @@ package models
 
 import (
 	"fmt"
-	"main/dz7/internal/service"
+	common "main/dz7/internal/service/common"
 )
 
 type Players struct {
@@ -10,10 +10,10 @@ type Players struct {
 	player2 string
 }
 
-func NewPlayers() *Players {
+func NewPlayers(player1, player2 string) *Players {
 	return &Players{
-		player1: "",
-		player2: "",
+		player1: player1,
+		player2: player2,
 	}
 }
 
@@ -42,13 +42,12 @@ func (p *Players) SetPlayers(count int) {
 		fmt.Scan(&strp)
 		p.SetPlayer(i, strp)
 
-		err := service.CheckValue(p.GetPlayer(i))
+		err := common.CheckValue(p.GetPlayer(i))
 
 		if err != nil {
 			fmt.Println("Ошибка ввода:", err.Error())
 			return
 		}
-
 	}
 }
 

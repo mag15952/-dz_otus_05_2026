@@ -1,27 +1,33 @@
 package models
 
 import (
-	"main/dz7/internal/service"
+	service "main/dz7/internal/service/common"
 	"strconv"
-	"sync"
 )
 
 type Chessboard struct {
-	Boardcount int
-	length     int
-	AllBoard   [][]string
-	Mu         sync.RWMutex
+	length   int
+	allBoard [][]string
 }
 
-func NewChessboard(len int) *Chessboard {
+func (c *Chessboard) GetLen() int {
+	return c.length
+}
 
+func (c *Chessboard) GetAllBoard() [][]string {
+	return c.allBoard
+}
+
+func newChessboard(len int) *Chessboard {
 	return &Chessboard{
 		length: len,
 	}
-
 }
 
-func (c *Chessboard) SetChessboard() {
+// func (c *Chessboard) NewChessboard() {
+func SetChessboard(len int) *Chessboard {
+
+	c := newChessboard(len)
 
 	getLetters(c) //  расставляем буквы
 
@@ -50,17 +56,16 @@ func (c *Chessboard) SetChessboard() {
 
 	}
 
+	return c
 }
 
-func (c *Chessboard) PrintChessboard() {
-
-	service.PrintSliceNew(c.AllBoard)
+// /////////////////////////////////////
+func (c *Chessboard) SetAllBoard(arr [][]string) {
+	c.allBoard = arr
 }
 
-///////////////////////////////////////
-
-func (c *Chessboard) AddAllBoard(arr []string) {
-	c.AllBoard = append(c.AllBoard, arr)
+func (c *Chessboard) addSliceToBoard(arr []string) {
+	c.allBoard = append(c.allBoard, arr)
 }
 
 func getLetters(c *Chessboard) {
@@ -93,7 +98,7 @@ func getLetters(c *Chessboard) {
 
 	}
 
-	c.AddAllBoard(result)
+	c.addSliceToBoard(result)
 
 }
 
@@ -114,7 +119,7 @@ func getlineNew(c *Chessboard, i *int) {
 		}
 	}
 
-	c.AddAllBoard(result)
+	c.addSliceToBoard(result)
 
 }
 
@@ -123,21 +128,21 @@ func getWhite(c *Chessboard) {
 	schess := []string{string('\u2656'), string('\u2658'), string('\u2657'),
 		string('\u2654'), string('\u2655'), string('\u2657'), string('\u2658'), string('\u2656')}
 
-	c.AddAllBoard(makeSlice(c, schess, 1))
+	c.addSliceToBoard(makeSlice(c, schess, 1))
 }
 
 func getWhitePowns(c *Chessboard) {
 
 	schess := string('\u2659')
 
-	c.AddAllBoard(getPownSlice(c.length, schess, 2))
+	c.addSliceToBoard(getPownSlice(c.length, schess, 2))
 }
 
 func getBlackPowns(c *Chessboard, num int) {
 
 	schess := string('\u265f')
 
-	c.AddAllBoard(getPownSlice(c.length, schess, num))
+	c.addSliceToBoard(getPownSlice(c.length, schess, num))
 }
 
 func getBlack(c *Chessboard, num int) {
@@ -145,7 +150,7 @@ func getBlack(c *Chessboard, num int) {
 	schess := []string{string('\u265c'), string('\u265e'), string('\u265d'),
 		string('\u265a'), string('\u265b'), string('\u265d'), string('\u265e'), string('\u265c')}
 
-	c.AddAllBoard(makeSlice(c, schess, num))
+	c.addSliceToBoard(makeSlice(c, schess, num))
 
 }
 
